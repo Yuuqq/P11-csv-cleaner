@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📰</text></svg>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>P11 CSV 不触网一键洗表机</title>
+    <link rel="stylesheet" href="../shared/design-tokens.css" />
+<link rel="stylesheet" href="./styles.css" />
+  <meta name="description" content="CSV 不触网一键洗表机。P11 CSV 不触网一键洗表机" />
+  <meta property="og:title" content="P11 CSV 不触网洗表机" />
+  <meta property="og:description" content="CSV 不触网洗表机 — 前端纯静态新闻工具" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yuuqq.github.io/P11-csv-cleaner/" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>CSV 不触网一键洗表机</h1>
+      <p>拖入 CSV 后在浏览器内完成去重、补空值、预览和图表生成。</p>
+      <p class="note">数据仅在本地内存处理，不上传服务器。</p>
+    </header>
+
+    <section class="card controls">
+      <label for="fileInput" class="dropzone" id="dropzone">
+        <input id="fileInput" type="file" accept=".csv,text/csv" />
+        <span>拖拽 CSV 到此，或点击选择文件</span>
+      </label>
+
+      <div class="ops">
+        <label for="dedupe"><input id="dedupe" type="checkbox" checked /> 去重（按整行）</label>
+        <label for="dedupe"><input id="fillBlank" type="checkbox" checked  aria-label="f il lB la nk"/> 空值填补（数值列填 0）</label>
+        <button id="runBtn" type="button">执行清洗</button>
+        <button id="exportBtn" type="button" disabled>导出清洗后 CSV</button>
+      </div>
+      <p id="status" aria-live="polite">状态: 等待文件</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>表格预览（前 100 行）</h2>
+        <div id="tableWrap" class="table-wrap"></div>
+      </article>
+      <article class="card">
+        <h2>图表预览</h2>
+        <div id="chart" class="chart"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" crossorigin="anonymous"></script>
+    <script src="./pm-metrics.js" defer></script>
+<script src="./app.js" defer></script>
+
+  <!-- Cross-Project Navigation -->
+  <nav style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:13px;border-top:1px solid #e5e5e5;margin-top:16px;color:#666;">
+    <a href="https://yuuqq.github.io/_codex/" style="text-decoration:none;">📋 工具箱导航</a>
+    <span style="opacity:.4">P11</span>
+  </nav>
+
+  <!-- Privacy Notice -->
+  <div style="text-align:center;padding:12px 16px;font-size:12px;color:#888;border-top:1px solid #eee;margin-top:24px;">
+    🔒 隐私提示：本工具所有数据处理均在您的浏览器本地完成，不会上传任何数据至服务器。
+  </div></body>
+</html>
