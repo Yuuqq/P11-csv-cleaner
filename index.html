@@ -12,6 +12,15 @@
   <meta property="og:description" content="CSV 不触网洗表机 — 前端纯静态新闻工具" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://yuuqq.github.io/P11-csv-cleaner/" />
+  <link rel="manifest" href="./manifest.json" />
+<style media="print">
+.gnav,.pedagogy-panel,.explore-section,[class*="dark-toggle"],button[aria-label]{display:none!important}
+body{background:#fff!important;color:#000!important;font-size:11pt}
+.app,main,.container{box-shadow:none!important;border:none!important;padding:0!important}
+a{color:#000!important;text-decoration:underline}
+a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}
+@page{margin:2cm}
+</style>
 </head>
 <body>
   <main class="app">
@@ -21,6 +30,13 @@
       <p class="note">数据仅在本地内存处理，不上传服务器。</p>
     </header>
 
+    <section class="card">
+      <details class="teach-card" open>
+        <summary>🎓 为什么要清洗数据？</summary>
+        <p>数据清洗是数据新闻工作中的第一步。原始数据中常包含<strong>重复行</strong>（可能导致重复计数）、<strong>空值</strong>（影响统计计算）和<strong>格式不一致</strong>（如日期写法不统一）等问题。未经清洗的数据直接做分析，可能得出错误结论。</p>
+      </details>
+    </section>
+
     <section class="card controls">
       <label for="fileInput" class="dropzone" id="dropzone">
         <input id="fileInput" type="file" accept=".csv,text/csv" />
@@ -29,7 +45,7 @@
 
       <div class="ops">
         <label for="dedupe"><input id="dedupe" type="checkbox" checked /> 去重（按整行）</label>
-        <label for="dedupe"><input id="fillBlank" type="checkbox" checked  aria-label="f il lB la nk"/> 空值填补（数值列填 0）</label>
+        <label for="fillBlank"><input id="fillBlank" type="checkbox" checked /> 空值填补（数值列填 0）</label>
         <button id="runBtn" type="button">执行清洗</button>
         <button id="exportBtn" type="button" disabled>导出清洗后 CSV</button>
       </div>
@@ -48,19 +64,32 @@
     </section>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" crossorigin="anonymous"></script>
+  <script src="../shared/vendor/papaparse.min.js"></script>
+  <script src="../shared/vendor/echarts.min.js"></script>
     <script src="./pm-metrics.js" defer></script>
 <script src="./app.js" defer></script>
 
   <!-- Cross-Project Navigation -->
   <nav style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:13px;border-top:1px solid #e5e5e5;margin-top:16px;color:#666;">
-    <a href="https://yuuqq.github.io/_codex/" style="text-decoration:none;">📋 工具箱导航</a>
+    <a href="https://yuuqq.github.io/journalism-toolbox/" style="text-decoration:none;">📋 工具箱导航</a>
     <span style="opacity:.4">P11</span>
   </nav>
 
   <!-- Privacy Notice -->
   <div style="text-align:center;padding:12px 16px;font-size:12px;color:#888;border-top:1px solid #eee;margin-top:24px;">
     🔒 隐私提示：本工具所有数据处理均在您的浏览器本地完成，不会上传任何数据至服务器。
-  </div></body>
+  </div>  <script src="../shared/dark-toggle.js" defer></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}</script>
+  <script src="../shared/cmd-palette.js" defer></script>
+  <script src="../shared/toast.js" defer></script>
+  <script src="../shared/onboarding.js" defer></script>
+  <script src="../shared/url-state.js" defer></script>
+
+  <script src="../shared/pedagogy-data-p1.js" defer></script>
+  <script src="../shared/pedagogy-data-p2.js" defer></script>
+  <script src="../shared/global-nav.js" defer></script>
+  <script src="../shared/kbd-hints.js" defer></script>
+</body>
 </html>
+
+
