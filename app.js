@@ -264,3 +264,27 @@ if (!window.echarts) {
     }, { once: false });
   } catch (_e) {}
 })();
+
+
+// === Auto-load demo CSV ===
+(function() {
+  function injectDemoCSV() {
+    var csvContent = 'Name,Age,City,Salary,Email\n张三,28,北京,15000,zhangsan@example.com\n李四,,上海,18000,lisi@test.com\n王五,35,广州,,wangwu@mail.com\n张三,28,北京,15000,zhangsan@example.com\n赵六,42,深圳,25000,\n"孙七",29,"杭州",12000,sunqi@demo.cn\n周八,-5,成都,9999999,bad-email\n吴九,31, 南京 ,16000,wujiu@test.com\n郑十,abc,武汉,14000,zhengshi@mail.com\n';
+    var blob = new Blob([csvContent], {type: 'text/csv'});
+    var file = new File([blob], 'demo_dirty_data.csv', {type: 'text/csv'});
+    var input = document.querySelector('input[type="file"]');
+    if (!input) return;
+    var dt = new DataTransfer();
+    dt.items.add(file);
+    input.files = dt.files;
+    input.dispatchEvent(new Event('change', {bubbles: true}));
+  }
+  // Add demo button
+  var demoBtn = document.createElement('button');
+  demoBtn.type = 'button';
+  demoBtn.textContent = '📊 加载示例脏数据';
+  demoBtn.style.cssText = 'margin:8px 0;padding:8px 16px;border:2px dashed var(--accent,#c7491f);border-radius:8px;background:transparent;color:var(--accent,#c7491f);font-weight:700;cursor:pointer;font-size:0.95rem;';
+  demoBtn.onclick = injectDemoCSV;
+  var fileInput = document.querySelector('input[type="file"]');
+  if (fileInput) fileInput.parentNode.insertBefore(demoBtn, fileInput.nextSibling);
+})();
