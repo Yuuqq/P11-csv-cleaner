@@ -2,7 +2,7 @@
   --bg: #eef8fb;
   --card: #fff;
   --line: #c6dde5;
-  --ink: #14303b;
+  --ink: #0a1f28;
 }
 
 * { box-sizing: border-box; }
@@ -223,3 +223,5 @@ details[open] summary { margin-bottom: 8px; }
   transition: opacity 0.3s ease;
 }
 .toast-msg.show { opacity: 1; }
+
+label { color: var(--ink, #0f172a) !important; }
