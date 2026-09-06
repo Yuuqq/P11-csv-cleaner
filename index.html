@@ -8,6 +8,7 @@
   <meta name="color-scheme" content="light dark">
   <title>P11 CSV 不触网一键洗表机</title>
     <link rel="stylesheet" href="../shared/design-tokens.css" />
+<link rel="stylesheet" href="https://yuuqq.github.io/shared/design-tokens.css" />
 <link rel="stylesheet" href="./styles.css" />
   <meta name="description" content="CSV 不触网一键洗表机。P11 CSV 不触网一键洗表机" />
   <meta property="og:title" content="P11 CSV 不触网洗表机" />
@@ -34,7 +35,7 @@ a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}
     </header>
 
     <section class="card">
-      <details class="teach-card" open>
+      <details class="teach-card">
         <summary>🎓 为什么要清洗数据？</summary>
         <p>数据清洗是数据新闻工作中的第一步。原始数据中常包含<strong>重复行</strong>（可能导致重复计数）、<strong>空值</strong>（影响统计计算）和<strong>格式不一致</strong>（如日期写法不统一）等问题。未经清洗的数据直接做分析，可能得出错误结论。</p>
       </details>
@@ -67,8 +68,8 @@ a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}
     </section>
   </main>
 
-  <script src="../shared/vendor/papaparse.min.js"></script>
-  <script src="../shared/vendor/echarts.min.js"></script>
+  <script src="../shared/vendor/papaparse.min.js" onerror="this.onerror=null;this.src='https://yuuqq.github.io/shared/vendor/papaparse.min.js'"></script>
+  <script src="../shared/vendor/echarts.min.js" onerror="this.onerror=null;this.src='https://yuuqq.github.io/shared/vendor/echarts.min.js'"></script>
     <script src="./pm-metrics.js" defer></script>
 <script src="./app.js" defer></script>
 
@@ -81,7 +82,21 @@ a[href]::after{content:" (" attr(href) ")";font-size:9pt;color:#666}
   <!-- Privacy Notice -->
   <div style="text-align:center;padding:12px 16px;font-size:12px;color:#888;border-top:1px solid #eee;margin-top:24px;">
     🔒 隐私提示：本工具所有数据处理均在您的浏览器本地完成，不会上传任何数据至服务器。
-  <script src="../shared/releases/v2.6/loader.js" data-modules="dark,cmd,toast,onboarding,url-state,pedagogy-p1,pedagogy-p2,nav,kbd"></script>
+  <script>
+(function () {
+  var modules = "dark,cmd,toast,onboarding,url-state,pedagogy-p1,pedagogy-p2,nav,kbd";
+  var s = document.createElement("script");
+  s.src = "../shared/releases/v2.6/loader.js";
+  s.setAttribute("data-modules", modules);
+  s.onerror = function () {
+    var t = document.createElement("script");
+    t.src = "https://yuuqq.github.io/shared/releases/v2.6/loader.js";
+    t.setAttribute("data-modules", modules);
+    document.body.appendChild(t);
+  };
+  document.body.appendChild(s);
+})();
+</script>
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}</script>
 
 </body>

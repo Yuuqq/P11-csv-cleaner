@@ -285,6 +285,10 @@ if (!window.echarts) {
   demoBtn.textContent = '📊 加载示例脏数据';
   demoBtn.style.cssText = 'margin:8px 0;padding:8px 16px;border:2px dashed var(--accent,#c7491f);border-radius:8px;background:transparent;color:var(--accent,#c7491f);font-weight:700;cursor:pointer;font-size:0.95rem;';
   demoBtn.onclick = injectDemoCSV;
-  var fileInput = document.querySelector('input[type="file"]');
-  if (fileInput) fileInput.parentNode.insertBefore(demoBtn, fileInput.nextSibling);
+  var drop = document.getElementById('dropzone');
+  if (drop && drop.parentNode) drop.parentNode.insertBefore(demoBtn, drop);
+  else {
+    var fileInput = document.querySelector('input[type="file"]');
+    if (fileInput) fileInput.parentNode.insertBefore(demoBtn, fileInput);
+  }
 })();
