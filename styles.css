@@ -143,7 +143,7 @@ a { transition: color 0.15s ease; }
   .app, main, .container { padding: 12px; }
   h1 { font-size: 1.5rem; }
   h2 { font-size: 1.2rem; }
-  button, .btn { width: 100%; }
+  button, .btn { width: auto; min-height: 44px; }
 }
 
 /* === CSS Professor Animation Upgrade (Round 22) === */
@@ -174,7 +174,7 @@ a { transition: color 0.15s ease; }
   50% { box-shadow: 0 2px 12px rgba(199,73,31,0.25); }
 }
 button[id*="Btn"]:not(:disabled), .btn-primary {
-  animation: btnPulse 3s ease-in-out infinite;
+  animation: none;
 }
 button:disabled { animation: none; opacity: 0.6; }
 
