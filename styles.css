@@ -1,35 +1,32 @@
 :root {
-  --bg: #eef8fb;
-  --card: #fff;
-  --line: #c6dde5;
-  --ink: #0a1f28;
+  --bg: #F0E6CF;
+  --card: #F7EFDA;
+  --line: #D3C4A0;
+  --ink: #3A2E20;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: "Source Sans 3", "Noto Sans SC", sans-serif;
+  font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 12% 10%, #dff7ff 0, transparent 34%),
-    radial-gradient(circle at 85% 90%, #e8f0ff 0, transparent 34%),
-    var(--bg);
+  background: var(--bg);
 }
 
 .app { max-width: 1280px; margin: 0 auto; padding: 16px; }
 .hero, .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 14px; margin-bottom: 12px; }
 .hero h1 { margin: 0 0 8px; }
-.note { color: #305867; }
+.note { color: var(--ink-secondary, #6E5B41); }
 
 .dropzone {
   display: block;
-  border: 2px dashed #9ec8d4;
+  border: 2px dashed var(--line, #D3C4A0);
   border-radius: 6px;
   padding: 18px;
   text-align: center;
   cursor: pointer;
-  background: #f7fdff;
+  background: var(--paper-hi, #F7EFDA);
 }
 
 .dropzone input { display: none; }
@@ -64,7 +61,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
   max-height: 58vh;
   overflow: auto;
   border: 1px solid #cfe1e7;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
 table {
@@ -218,10 +215,66 @@ details[open] summary { margin-bottom: 8px; }
 }
 .toast-msg {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #333; color: #fff; padding: 10px 20px; border-radius: 8px;
+  background: #333; color: #fff; padding: 10px 20px; border-radius: 6px;
   font-size: 0.9rem; z-index: 9999; opacity: 0;
   transition: opacity 0.3s ease;
 }
 .toast-msg.show { opacity: 1; }
 
 label { color: var(--ink, #0f172a) !important; }
+/* === Parchment edge polish (local leftovers + onboarding inject) === */
+.flow-guide {
+  border-radius: 6px !important;
+  overflow: visible !important;
+  background: var(--paper-3, #EFE4C6) !important;
+  box-shadow: var(--shadow-card, 0 2px 14px rgba(107, 90, 68, 0.16)) !important;
+}
+.flow-guide-btn {
+  border-radius: 4px !important;
+  width: auto !important;
+  max-width: 100%;
+  overflow: visible !important;
+}
+.flow-guide-btn.primary {
+  background: var(--ink, #3A2E20) !important;
+  border-color: var(--ink, #3A2E20) !important;
+  color: var(--paper-hi, #F7EFDA) !important;
+}
+.onboarding-ring { border-radius: 6px !important; }
+.onboarding-tip {
+  border-radius: 6px !important;
+  background: var(--paper-hi, #F7EFDA) !important;
+  color: var(--ink, #3A2E20) !important;
+}
+.onboarding-tip-actions button { border-radius: 4px !important; }
+.dropzone,
+.drop-zone {
+  background: var(--paper-hi, #F7EFDA) !important;
+  border-color: var(--line, #D3C4A0) !important;
+  color: var(--ink, #3A2E20) !important;
+  border-radius: 6px !important;
+}
+.note,
+.hint,
+.muted {
+  color: var(--ink-secondary, #6E5B41) !important;
+}
+.toast-msg { border-radius: 6px !important; }
+.table-wrap,
+.chart-wrap,
+textarea,
+select,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]) {
+  border-radius: 6px !important;
+}
+.map { border-radius: 6px !important; }
+.box { border-radius: 4px !important; }
+.pedagogy-panel,
+.pedagogy-body,
+.pedagogy-toggle {
+  overflow: visible !important;
+}
+@media (max-width: 768px) {
+  .flow-guide-actions { align-items: flex-start !important; }
+  .flow-guide-btn { width: auto !important; }
+}
