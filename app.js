@@ -166,12 +166,30 @@ function renderChart(headers, rows) {
     value: Number(r[numericCol]) || 0
   }));
 
+  const paint = getComputedStyle(document.documentElement);
+  const ink = paint.getPropertyValue("--ink").trim() || "#3A2E20";
+  const accent = paint.getPropertyValue("--accent").trim() || "#A2402F";
+  const line = paint.getPropertyValue("--line").trim() || "#D3C4A0";
   c.setOption({
-    title: { text: `预览图：${categoryCol} vs ${numericCol}` },
+    backgroundColor: "transparent",
+    textStyle: { color: ink },
+    title: {
+      text: `预览图：${categoryCol} vs ${numericCol}`,
+      textStyle: { color: ink, fontWeight: 600 }
+    },
     tooltip: {},
-    xAxis: { type: "category", data: data.map(d => d.name) },
-    yAxis: { type: "value" },
-    series: [{ type: "bar", data: data.map(d => d.value), itemStyle: { color: "#2084a0" } }]
+    xAxis: {
+      type: "category",
+      data: data.map(d => d.name),
+      axisLabel: { color: ink },
+      axisLine: { lineStyle: { color: line } }
+    },
+    yAxis: {
+      type: "value",
+      axisLabel: { color: ink },
+      splitLine: { lineStyle: { color: line } }
+    },
+    series: [{ type: "bar", data: data.map(d => d.value), itemStyle: { color: accent } }]
   });
 }
 
@@ -202,14 +220,14 @@ fileInput.addEventListener("change", e => handleFile(e.target.files?.[0]));
 
 dropzone.addEventListener("dragover", e => {
   e.preventDefault();
-  dropzone.style.borderColor = "#3a94ad";
+  dropzone.classList.add("is-dragover");
 });
 dropzone.addEventListener("dragleave", () => {
-  dropzone.style.borderColor = "#9ec8d4";
+  dropzone.classList.remove("is-dragover");
 });
 dropzone.addEventListener("drop", e => {
   e.preventDefault();
-  dropzone.style.borderColor = "#9ec8d4";
+  dropzone.classList.remove("is-dragover");
   handleFile(e.dataTransfer.files?.[0]);
 });
 
@@ -248,6 +266,10 @@ if (!window.echarts) {
   clearChart();
 }
 
+window.addEventListener("resize", () => {
+  if (chart) chart.resize();
+});
+
 // === PM Metrics Integration ===
 (function() {
   try {
@@ -282,9 +304,10 @@ if (!window.echarts) {
   // Add demo button
   var demoBtn = document.createElement('button');
   demoBtn.type = 'button';
-  demoBtn.textContent = '📊 加载示例脏数据';
-  demoBtn.style.cssText = 'margin:8px 0;padding:8px 16px;border:2px dashed var(--accent,#c7491f);border-radius:8px;background:transparent;color:var(--accent,#c7491f);font-weight:700;cursor:pointer;font-size:0.95rem;';
+  demoBtn.className = 'example-btn';
+  demoBtn.textContent = '加载示例脏数据';
   demoBtn.onclick = injectDemoCSV;
   var fileInput = document.querySelector('input[type="file"]');
-  if (fileInput) fileInput.parentNode.insertBefore(demoBtn, fileInput.nextSibling);
+  var zone = fileInput && fileInput.closest("#dropzone");
+  if (zone && zone.parentNode) zone.parentNode.insertBefore(demoBtn, zone.nextSibling);
 })();
