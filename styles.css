@@ -1,70 +1,158 @@
-:root {
-  --bg: #eef8fb;
-  --card: #fff;
-  --line: #c6dde5;
-  --ink: #14303b;
+/* P11 layout only. Colour, type, radius, and motion come from shared tokens. */
+
+.app,
+.tool-chrome,
+.tool-teach,
+.tool-footer {
+  max-width: 1120px;
+  margin-inline: auto;
 }
 
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: "Source Sans 3", "Noto Sans SC", sans-serif;
+.hero h1 {
+  margin: 0 0 var(--space-sm);
+  background: none;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 12% 10%, #dff7ff 0, transparent 34%),
-    radial-gradient(circle at 85% 90%, #e8f0ff 0, transparent 34%),
-    var(--bg);
+  -webkit-text-fill-color: currentColor;
 }
 
-.app { max-width: 1280px; margin: 0 auto; padding: 16px; }
-.hero, .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 12px; }
-.hero h1 { margin: 0 0 8px; }
-.note { color: #305867; }
+.hero p {
+  margin: 0 0 var(--space-sm);
+  max-width: 68ch;
+}
+
+.note {
+  color: var(--ink-secondary);
+  margin-bottom: 0;
+}
+
+.card {
+  margin-bottom: var(--space-md);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
 
 .dropzone {
   display: block;
-  border: 2px dashed #9ec8d4;
-  border-radius: 12px;
-  padding: 18px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-md);
   text-align: center;
   cursor: pointer;
-  background: #f7fdff;
+  background: var(--card);
+  color: var(--ink);
 }
 
-.dropzone input { display: none; }
+.dropzone input {
+  display: none;
+}
+
+.controls > .example-btn {
+  align-self: flex-start;
+}
+
+.dropzone:hover,
+.dropzone.is-dragover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
 
 .ops {
-  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-sm) var(--space-md);
   align-items: center;
 }
 
-button {
-  border: 0;
-  border-radius: 999px;
-  padding: 8px 14px;
-  color: #fff;
-  cursor: pointer;
-  font: inherit;
-  background: linear-gradient(135deg, #2b8faa, #18657d);
+.ops label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 44px;
+  color: var(--ink);
 }
 
-button:disabled { opacity: 0.6; cursor: not-allowed; }
+button,
+.example-btn {
+  font: inherit;
+  cursor: pointer;
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+button.btn-secondary,
+button.example-btn {
+  background: transparent;
+  color: var(--ink);
+  border: var(--rule-hair) solid var(--line);
+}
+
+button:hover:not(:disabled),
+.example-btn:hover {
+  background: var(--accent-hover);
+  color: var(--accent-ink);
+  border-color: var(--accent-hover);
+}
+
+button.btn-secondary:hover:not(:disabled),
+button.example-btn:hover {
+  background: var(--accent-light);
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+#status {
+  margin: 0;
+  color: var(--ink-secondary);
+  font-size: 0.9rem;
+}
+
+/* modern-styles underlines links with six :not()s. Match that specificity so the wordmark stays plain ink. */
+a.tool-chrome__mark:not(.btn):not(.map-link):not(.open-btn):not(.chip):not(.pill):not(.gnav-item) {
+  color: var(--ink) !important;
+  text-decoration-line: none !important;
+}
+
+a.tool-chrome__mark:not(.btn):not(.map-link):not(.open-btn):not(.chip):not(.pill):not(.gnav-item):hover {
+  color: var(--accent) !important;
+}
 
 .grid {
   display: grid;
-  gap: 12px;
-  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.grid > .card,
+.table-wrap,
+.chart {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.grid > .card h2 {
+  margin: 0 0 var(--space-sm);
+  font-size: 1.15rem;
 }
 
 .table-wrap {
   max-height: 58vh;
   overflow: auto;
-  border: 1px solid #cfe1e7;
-  border-radius: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--card);
 }
 
 table {
@@ -73,331 +161,124 @@ table {
   font-size: 0.92rem;
 }
 
-th, td {
-  border: 1px solid #d8e5ea;
-  padding: 6px;
+th,
+td {
+  border: 1px solid var(--line);
+  padding: 6px 8px;
   white-space: nowrap;
+  text-align: left;
 }
 
-.chart { height: 58vh; }
+th {
+  position: sticky;
+  top: 0;
+  background: var(--paper-hi) !important;
+  color: var(--ink-secondary);
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+.chart {
+  height: 58vh;
+  min-height: 280px;
+  border-radius: var(--radius-md);
+  background: var(--card);
+}
+
+.tool-teach p:last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dropzone,
+  button,
+  .example-btn,
+  .tool-chrome__mark {
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+}
 
 @media (max-width: 980px) {
-  .grid { grid-template-columns: 1fr; }
-  .chart { height: 40vh; }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .chart {
+    height: 40vh;
+  }
 }
 
 @media (max-width: 520px) {
-  input, textarea, select { font-size: 16px; }
-}
-
-/* === Dark Mode Override (auto-generated) === */
-:root[data-theme="dark"] {
-  --bg: #1a1a2e;
-  --card: #242438;
-  --line: #3a3a50;
-  --ink: #e8e8f0;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-  --bg: #1a1a2e;
-  --card: #242438;
-  --line: #3a3a50;
-  --ink: #e8e8f0;
+  input,
+  textarea,
+  select {
+    font-size: 16px;
   }
 }
 
-/* === CSS Professor Upgrade (Round 20) === */
-
-/* Card system */
-.card, [class*="card"], section, .panel, .container > div { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-.card:hover, [class*="card"]:hover { transform: translateY(-2px); }
-
-/* Button polish */
-button, .btn, [type="submit"], [type="button"] {
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-button:hover, .btn:hover, [type="submit"]:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-button:active, .btn:active { transform: scale(0.98); }
-
-/* Input polish */
-input, textarea, select {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-input:focus, textarea:focus, select:focus {
-  box-shadow: 0 0 0 3px rgba(199,73,31,0.15);
-}
-
-/* Link hover */
-a { transition: color 0.15s ease; }
-
-/* Focus outline */
-:focus-visible { outline: 2px solid var(--accent, #c7491f); outline-offset: 2px; }
-
-/* Mobile responsive */
-@media (max-width: 600px) {
-  body { padding: 8px; }
-  .app, main, .container { padding: 12px; }
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.2rem; }
-  button, .btn { width: 100%; }
-}
-
-/* === CSS Professor Animation Upgrade (Round 22) === */
-
-/* Page entrance */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.app, main, body > .container { animation: fadeInUp 0.4s ease-out; }
-
-/* Staggered card entrance */
-@keyframes cardReveal {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-.card, [class*="card"], .mission-card, .module-card, .stat-card {
-  animation: cardReveal 0.35s ease-out both;
-}
-.card:nth-child(2), [class*="card"]:nth-child(2) { animation-delay: 0.05s; }
-.card:nth-child(3), [class*="card"]:nth-child(3) { animation-delay: 0.1s; }
-.card:nth-child(4), [class*="card"]:nth-child(4) { animation-delay: 0.15s; }
-.card:nth-child(5), [class*="card"]:nth-child(5) { animation-delay: 0.2s; }
-
-/* Subtle pulse for primary buttons */
-@keyframes btnPulse {
-  0%, 100% { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-  50% { box-shadow: 0 2px 12px rgba(199,73,31,0.25); }
-}
-button[id*="Btn"]:not(:disabled), .btn-primary {
-  animation: btnPulse 3s ease-in-out infinite;
-}
-button:disabled { animation: none; opacity: 0.6; }
-
-/* Smooth height transitions for collapsible sections */
-details { transition: all 0.2s ease; }
-details[open] summary { margin-bottom: 8px; }
-
-/* Tooltip fade */
-[title] { position: relative; }
-
-/* Progress bar animation */
-@keyframes progressFill {
-  from { width: 0; }
-}
-.mc-bar-fill, .mod-progress-fill, .bar-fill, progress::-webkit-progress-value {
-  animation: progressFill 0.6s ease-out;
-}
-
-/* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .dropzone,
+  button,
+  .example-btn,
+  .tool-chrome__mark {
+    transition: none;
   }
 }
 
-/* === Loading & Feedback States === */
-@keyframes spin { to { transform: rotate(360deg); } }
-.btn-loading { position: relative; pointer-events: none; opacity: 0.7; }
-.btn-loading::after {
-  content: '';
-  position: absolute;
-  right: 8px; top: 50%;
-  width: 14px; height: 14px;
-  margin-top: -7px;
-  border: 2px solid transparent;
-  border-top-color: currentColor;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-}
-.toast-msg {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: #333; color: #fff; padding: 10px 20px; border-radius: 8px;
-  font-size: 0.9rem; z-index: 9999; opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.toast-msg.show { opacity: 1; }
-
-/* ---- Print-friendly polish (v2.3 batch) ---- */
 @media print {
-  body { background: white !important; color: black !important; }
-  .global-nav, [data-nav], .skip-link, button:not(.print-keep), .btn:not(.print-keep) { display: none !important; }
-  a { color: inherit; text-decoration: underline; }
-  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; word-break: break-all; }
-  .card, .panel, .hero { box-shadow: none !important; border: 1px solid #ccc !important; page-break-inside: avoid; }
-  h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
-}
+  .gnav,
+  .pedagogy-panel,
+  .explore-section,
+  [class*="dark-toggle"],
+  button[aria-label],
+  .skip-link,
+  .global-nav,
+  [data-nav] {
+    display: none !important;
+  }
 
-/* =====================================================================
- * v2.4.1 deep polish (Tier-2 batch) — ui-ux-pro-max + frontend-design
- * Uses each tool's existing --accent / --line / --card / --ink tokens.
- * Architect-approved on Tier-1 (v2.4.1 / 2026-05). All :where / class
- * scoped — won't affect tools that don't use these classes.
- * ===================================================================== */
+  body {
+    background: var(--print-paper) !important;
+    color: var(--print-ink) !important;
+    font-size: 11pt;
+  }
 
-/* P3 Hierarchy — Hero h1 brand gradient with 3-tier fallback chain */
-.hero h1 {
-  color: var(--accent, var(--focus, #2563eb));
-  background: linear-gradient(135deg,
-    var(--accent, var(--focus, #2563eb)) 0%,
-    #1e3a8a 100%);
-  background: linear-gradient(135deg,
-    var(--accent, var(--focus, #2563eb)) 0%,
-    color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 65%, var(--ink, #0f172a)) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-@supports not (background-clip: text) {
-  .hero h1 {
-    color: var(--accent, var(--focus, #2563eb));
-    -webkit-text-fill-color: currentColor;
-    background: none;
+  .app,
+  main,
+  .container {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  a {
+    color: var(--print-ink) !important;
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: color-mix(in srgb, var(--print-ink) 70%, var(--print-paper));
+  }
+
+  .card,
+  .hero,
+  .panel {
+    box-shadow: none !important;
+    background: var(--print-paper);
+    border: 1px solid color-mix(in srgb, var(--print-ink) 22%, var(--print-paper)) !important;
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  @page {
+    margin: 2cm;
   }
 }
-
-/* P5 Layout — hero subtitle improved rhythm */
-.hero .lead { max-width: 64ch; }
-.hero .subtle { max-width: 72ch; opacity: 0.85; }
-
-/* P8 Buttons — primary via explicit hooks (no :first-of-type guesswork) */
-.btn-primary, [data-primary],
-button#scanBtn, button#submitBtn, button#generateBtn, button#checkBtn,
-button#extractBtn, button#startBtn, button#runBtn, button#analyzeBtn,
-button[type="submit"]:not(.ghost):not(.btn-secondary) {
-  background: linear-gradient(180deg,
-    var(--accent, var(--focus, #2563eb)),
-    #1e40af);
-  background: linear-gradient(180deg,
-    var(--accent, var(--focus, #2563eb)),
-    color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 78%, #000));
-  color: #fff;
-  border: 1px solid #1e40af;
-  border: 1px solid color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 70%, #000);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 6px 14px -6px rgba(37,99,235,0.5);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset, 0 6px 14px -6px color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 50%, transparent);
-}
-
-/* P7 Micro — card hover lift; guarded by hover capability + reduced-motion */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .card:not(.hero):not(:has(textarea)):not(:has(form)) {
-    transition: transform 0.18s ease, box-shadow 0.22s ease;
-  }
-  .card:not(.hero):not(:has(textarea)):not(:has(form)):hover {
-    transform: translateY(-1px);
-  }
-}
-
-/* P8 Forms — textarea focus halo */
-textarea {
-  border-radius: 10px;
-  transition: border-color 0.15s ease, box-shadow 0.18s ease;
-}
-textarea:focus, textarea:focus-visible {
-  border-color: var(--accent, var(--focus, #2563eb));
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 18%, transparent);
-}
-
-/* P5 Status — aria-live regions render as accent-tinted pill */
-[aria-live="polite"], [aria-live="assertive"], #status {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.85em;
-  background: rgba(37,99,235,0.08);
-  background: color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 8%, transparent);
-  border: 1px solid rgba(37,99,235,0.18);
-  border: 1px solid color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 18%, transparent);
-  font-variant-numeric: tabular-nums;
-}
-
-/* P6 Details/teach-card — hover affordance */
-details.teach-card summary {
-  cursor: pointer;
-  border-radius: 8px;
-  padding: 4px 6px;
-  margin: -4px -6px;
-  transition: background 0.15s ease;
-}
-details.teach-card summary:hover {
-  background: rgba(37,99,235,0.08);
-  background: color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 8%, transparent);
-}
-details.teach-card[open] summary {
-  margin-bottom: 4px;
-}
-
-/* P5 Mobile — sticky hero on small screens (with solid bg fallback) */
-@media (max-width: 640px) {
-  .hero {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    background: var(--card, #fff);
-    background: color-mix(in srgb, var(--card, #fff) 88%, transparent);
-  }
-  @supports not (backdrop-filter: blur(8px)) {
-    .hero { background: var(--card, #fff); }
-  }
-}
-
-/* =====================================================================
- * v2.5 tool-specific — per-tool unique enhancements
- * Archetypes: chart_svg, file_upload
- * ===================================================================== */
-
-/* Chart/SVG visualization emphasis */
-svg { display: block; max-width: 100%; }
-svg text { font-family: ui-sans-serif, system-ui, "Noto Sans SC", sans-serif; }
-.chart, .chart-card, .chartWrap, [id="chart"], [id="scatterPlot"], [id="chartContainer"] {
-  border-radius: 12px;
-  background: var(--card, #fff);
-  position: relative;
-}
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  svg [data-bar], svg .bar, svg path[data-segment], svg rect[data-bar] {
-    transition: opacity 0.15s ease;
-  }
-  svg [data-bar]:hover, svg .bar:hover { opacity: 0.85; }
-}
-
-/* File upload affordance */
-.dropzone, .drop-zone, .file-label, [id="dropzone"] {
-  border: 2px dashed var(--line, rgba(15,23,42,.18));
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
-  background: rgba(255,255,255,0.4);
-}
-.dropzone:hover, .drop-zone:hover, .file-label:hover {
-  border-color: var(--accent, var(--focus, #2563eb));
-  background: rgba(37,99,235,0.04);
-  background: color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 5%, transparent);
-}
-.dropzone.dragover, .drop-zone.dragover, .dropzone.drag-over, .drop-zone.drag-over {
-  border-color: var(--accent, var(--focus, #2563eb));
-  background: rgba(37,99,235,0.08);
-  background: color-mix(in srgb, var(--accent, var(--focus, #2563eb)) 10%, transparent);
-  transform: scale(1.005);
-}
-input[type="file"] { cursor: pointer; }
-
-/* P11 — CSV table preview + ops chips */
-.table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line, rgba(15,23,42,.14)); }
-.table-wrap table { border-collapse: collapse; width: 100%; font-size: 0.88em; }
-.table-wrap th { background: rgba(37,99,235,0.06); position: sticky; top: 0; }
-.table-wrap td, .table-wrap th { padding: 6px 10px; border-bottom: 1px solid var(--line, rgba(15,23,42,.08)); }
-.ops { display: flex; flex-wrap: wrap; gap: 8px; }
-
